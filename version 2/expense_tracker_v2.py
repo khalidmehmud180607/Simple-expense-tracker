@@ -43,7 +43,8 @@ def highest_spend(data):
         if hv < j:
             hv = j
             hc = i
-    print(f"Highest spend Category : {hc}\nHighest spend money : {hv}\nPercentage : {hv*100/Total(l):.2f}%")
+    percentage=hv*100/Total(l) if Total(l)!=0 else 0
+    print(f"Highest spend Category : {hc}\nHighest spend money : {hv}\nPercentage : {percentage:.2f}%")
 #this function will get the minimum spending category
 def lowest_spend(data):
     lc=""
@@ -52,16 +53,19 @@ def lowest_spend(data):
         if lv> j:
             lv=j
             lc=i
-    print(f"Lowest spend Category : {lc}\nLowest spend money : {lv}\nPercentage : {lv*100/Total(l):.2f}%")
+    percentage=lv*100/Total(l) if Total(l)!=0 else 0
+    print(f"Lowest spend Category : {lc}\nLowest spend money : {lv}\nPercentage : {percentage:.2f}%")
 # the programme mainly start from here 
 print("----HI! Welcome!----")
 username=input("What is your name : ")
+if username=="":
+    username="Mr/Mrs ."
 firstname , * lastname=username.split()
 l=[]
 budget=10000
 while True :
     print("\n")
-    print(f"{firstname}....\nType the option number to choose an option...\nOPTION 1)Add expense\nOPTION 2)View reports\nOPTION 3)View expense of one category\nOPTION 4)Set budget\nOPTION 5)Delete an expense\nOPTION 6)Amount check\nOPTION 7)Quit")
+    print(f"Mr/Mrs.{firstname.title()}....\nType the option number to choose an option...\nOPTION 1)Add expense\nOPTION 2)View reports\nOPTION 3)View expense of one category\nOPTION 4)Set budget\nOPTION 5)Delete an expense\nOPTION 6)Amount check\nOPTION 7)Quit")
     try:
         a=int(input("Choose an option or pick QUIT to quit the  app : "))
     except ValueError:
@@ -189,7 +193,7 @@ while True :
         break
     else:
         print("Input invalid")
-print("\n----------------------------------------")
+print("\n--------------------------------------------------------------------------------")
 if len(l)!=0:
     print("---------EXPENSE SUMMARY----------")
     res=category_wise_data(l)
@@ -209,3 +213,4 @@ if len(l)!=0:
     
 else:
     print(f"You didnt spend any money\nRemaining money : {budget}")
+print("--------------------------------------------------------------------------------")
